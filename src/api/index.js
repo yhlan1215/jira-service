@@ -1,6 +1,9 @@
 import { Router } from 'express'
+import book from './book'
 
 const router = new Router()
+
+router.use('/books', book)
 
 /**
  * @apiDefine master Master access only

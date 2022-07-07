@@ -38,7 +38,7 @@ const config = {
   test: { },
   development: {
     mongo: {
-      uri: 'mongodb://localhost/rest-test-dev',
+      uri: 'mongodb+srv://yhlan1215:LYH522560@cluster0.u98pt.mongodb.net/?retryWrites=true&w=majority',
       options: {
         debug: true
       }
