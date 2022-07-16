@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose'
 import idValidator from 'mongoose-id-validator'
 
 const bookIndexSchema = new Schema({
-  bookName: {
+  book: {
     type: Schema.Types.ObjectId,
     ref: 'Book'
   },
