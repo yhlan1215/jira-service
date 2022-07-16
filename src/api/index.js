@@ -1,9 +1,15 @@
 import { Router } from 'express'
 import book from './book'
+import author from './author'
+import bookStore from './bookStore'
+import bookIndex from './bookIndex'
 
 const router = new Router()
 
 router.use('/books', book)
+router.use('/authors', author)
+router.use('/bookStores', bookStore)
+router.use('/bookIndexs', bookIndex)
 
 /**
  * @apiDefine master Master access only

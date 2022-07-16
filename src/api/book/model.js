@@ -1,42 +1,60 @@
 import mongoose, { Schema } from 'mongoose'
+import idValidator from 'mongoose-id-validator'
 
 const bookSchema = new Schema({
   name: {
-    type: String
+    type: String,
+    required: true,
+    index: true,
+    trim: true,
+    unique: true
   },
   author: {
-    type: String
+    type: Schema.Types.ObjectId,
+    ref: 'Author',
+    index: true,
+    required: true
   },
   price: {
-    type: Number
+    type: Number,
+    index: true,
+    min: 0
+  },
+  category: {
+    type: String,
+    enum: ['fiction', 'literature', 'art', 'animation humor', 'entertainment fashion', 'tourism', 'map geography'],
+    index: true,
+    trim: true,
+    required: true
+  },
+  isOld: {
+    type: Boolean,
+    index: true,
+    default: false
+  },
+  language: {
+    type: String,
+    index: true,
+    trim: true
   }
 }, {
-  timestamps: true,
   toJSON: {
     virtuals: true,
-    transform: (obj, ret) => { delete ret._id }
+    transform: (obj, ret) => {
+      delete ret._id
+      delete ret.__v
+    }
   }
 })
 
-bookSchema.methods = {
-  view (full) {
-    const view = {
-      // simple view
-      id: this.id,
-      name: this.name,
-      author: this.author,
-      price: this.price,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt
-    }
+bookSchema.virtual('bookIndexs', {
+  ref: 'BookIndex',
+  localField: '_id',
+  foreignField: 'bookName',
+  justOne: false
+})
 
-    return full ? {
-      ...view
-      // add properties for a full view
-    } : view
-  }
-}
-
+bookSchema.plugin(idValidator)
 const model = mongoose.model('Book', bookSchema)
 
 export const schema = model.schema

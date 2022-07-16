@@ -16,7 +16,9 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["<rootDir>/test/setup.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setup.js"
+    ]
   },
   "devDependencies": {
     "apidoc": "^0.20.0",
@@ -53,6 +55,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.9.4",
+    "mongoose-id-validator": "^0.6.0",
     "mongoose-keywords": "^0.4.0",
     "morgan": "^1.9.1",
     "querymen": "^2.1.4",
