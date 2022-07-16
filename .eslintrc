@@ -1,11 +1,25 @@
 {
-  "parser": "babel-eslint",
-  "extends": [
-    "standard"
-  ],
   "env": {
-    "jest": true,
-    "jasmine": true
+      "browser": true,
+      "es2021": true,
+      "node": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+      "jasmine": "readonly",
+      "beforeAll": "readonly",
+      "afterAll": "readonly",
+      "afterEach": "readonly",
+      "it": "readonly",
+      "describe": "readonly",
+      "beforeEach": "readonly",
+      "expect": "readonly"
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
   },
   "rules": {
       // Use 4 spaces as indent.

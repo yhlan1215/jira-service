@@ -1,5 +1,5 @@
-import { success, notFound } from '../../services/response/'
-import { Book } from '.'
+import { success, notFound } from '../../services/response.js'
+import Book from './model.js'
 
 export const create = ({ body }, res, next) =>
   Book.create(body)
@@ -93,7 +93,7 @@ export const helloName = ({ params }, res, next) =>
     .then(success(res))
     .catch(next)
 
-export const cloneBook = ({ body, params }, res, next) =>
+export const cloneBook = ({ params }, res, next) =>
   Book.findById(params.id)
     .then(notFound(res))
     .then((book) => {

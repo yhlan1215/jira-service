@@ -1,7 +1,7 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose from 'mongoose'
 import idValidator from 'mongoose-id-validator'
 
-const bookSchema = new Schema({
+const bookSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -10,7 +10,7 @@ const bookSchema = new Schema({
     unique: true
   },
   author: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Author',
     index: true,
     required: true

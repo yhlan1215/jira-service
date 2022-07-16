@@ -1,5 +1,5 @@
-import { success, notFound } from '../../services/response/'
-import { Author } from '.'
+import { success, notFound } from '../../services/response.js'
+import Author from './model.js'
 
 export const create = ({ body }, res, next) =>
   Author.create(body)

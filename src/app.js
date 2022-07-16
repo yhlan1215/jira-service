@@ -1,16 +1,19 @@
 import http from 'http'
-import { env, mongo, port, ip, apiRoot } from './config'
-import mongoose from './services/mongoose'
-import express from './services/express'
-import api from './api'
+import config from './config.js'
+import mongoose from './services/mongoose.js'
+import express from './services/express.js'
+import { api } from './api/index.js'
+import { success } from './services/response.js'
 
+const { apiRoot, ip, port, env, mongo } = config
 const app = express(apiRoot, api)
 const server = http.createServer(app)
+
+app.use(success)
 
 if (mongo.uri) {
   mongoose.connect(mongo.uri)
 }
-mongoose.Promise = Promise
 
 setImmediate(() => {
   server.listen(port, ip, () => {
@@ -18,4 +21,4 @@ setImmediate(() => {
   })
 })
 
-export default app
+export { app }

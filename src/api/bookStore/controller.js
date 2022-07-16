@@ -1,5 +1,5 @@
-import { success, notFound } from '../../services/response/'
-import { BookStore } from '.'
+import { success, notFound } from '../../services/response.js'
+import BookStore from './model.js'
 
 export const create = ({ body }, res, next) =>
   BookStore.create(body)
