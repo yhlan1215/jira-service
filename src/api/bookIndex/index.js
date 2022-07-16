@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
-import { create, index, show, update, destroy } from './controller'
-export BookIndex, { schema } from './model'
+import { create, index, show, update, destroy } from './controller.js'
 
 const router = new Router()
 

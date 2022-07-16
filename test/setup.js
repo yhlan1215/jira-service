@@ -1,9 +1,12 @@
-import { EventEmitter } from 'events'
-import MongodbMemoryServer from 'mongodb-memory-server'
+import events from 'events'
+import mongodbMemoryServer from 'mongodb-memory-server'
 import mongoose from '../src/services/mongoose'
 
-EventEmitter.defaultMaxListeners = Infinity
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+const { MongoMemoryServer } = mongodbMemoryServer
+
+events.EventEmitter.defaultMaxListeners = Infinity
+
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000
 
 global.Array = Array
 global.Date = Date
@@ -24,10 +27,12 @@ global.parseFloat = parseFloat
 let mongoServer
 
 beforeAll(async () => {
-  mongoServer = new MongodbMemoryServer()
+  mongoServer = new MongoMemoryServer()
   const mongoUri = await mongoServer.getUri()
-  await mongoose.connect(mongoUri, undefined, (err) => {
-    if (err) console.error(err)
+  await mongoose.connect(mongoUri, undefined, err => {
+    if (err) {
+      console.error(err)
+    }
   })
 })
 
@@ -39,7 +44,7 @@ afterAll(async () => {
 afterEach(async () => {
   const { collections } = mongoose.connection
   const promises = []
-  Object.keys(collections).forEach((collection) => {
+  Object.keys(collections).forEach(collection => {
     promises.push(collections[collection].deleteMany({}))
   })
   await Promise.all(promises)

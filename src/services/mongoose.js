@@ -1,20 +1,21 @@
 import Promise from 'bluebird'
 import mongoose from 'mongoose'
-import { mongo } from '../../config'
+import config from '../config.js'
 
-Object.keys(mongo.options || { }).forEach((key) => {
+const { mongo } = config
+
+Object.keys(mongo.options || { }).forEach(key => {
   mongoose.set(key, mongo.options[key])
 })
 
 mongoose.Promise = Promise
-/* istanbul ignore next */
+
 mongoose.Types.ObjectId.prototype.view = function () {
   return { id: this.toString() }
 }
 
-/* istanbul ignore next */
-mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error: ' + err)
+mongoose.connection.on('error', err => {
+  console.error(`MongoDB connection error: ${err}`)
   process.exit(-1)
 })
 

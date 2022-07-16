@@ -1,13 +1,13 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose from 'mongoose'
 import idValidator from 'mongoose-id-validator'
 
-const bookStoreSchema = new Schema({
+const bookStoreSchema = new mongoose.Schema({
   storeName: {
     type: String,
     required: true
   },
   bookIndex: [{
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'BookIndex'
   }]
 }, {

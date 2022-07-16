@@ -1,9 +1,9 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose from 'mongoose'
 import idValidator from 'mongoose-id-validator'
 
-const bookIndexSchema = new Schema({
+const bookIndexSchema = new mongoose.Schema({
   book: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Book'
   },
   theNumberOfBooks: {

@@ -1,5 +1,5 @@
-import { success, notFound } from '../../services/response/'
-import { BookIndex } from '.'
+import { success, notFound } from '../../services/response.js'
+import BookIndex from './model.js'
 
 export const create = ({ body }, res, next) =>
   BookIndex.create(body)
