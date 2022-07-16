@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import idValidator from 'mongoose-id-validator'
 
 const bookStoreSchema = new mongoose.Schema({
-  storeName: {
+  name: {
     type: String,
     required: true
   },

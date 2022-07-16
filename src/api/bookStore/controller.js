@@ -8,13 +8,20 @@ export const create = ({ body }, res, next) =>
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   BookStore.find(query, select, cursor)
-    .populate('bookIndexs')
+    .populate({
+      path: 'books',
+      select: ['book', 'theNumberOfBooks'],
+      populate: {
+        path: 'book',
+        select: 'name',
+      }
+    })
     .then(success(res))
     .catch(next)
 
 export const show = ({ params }, res, next) =>
   BookStore.findById(params.id)
-    .populate('bookIndexs')
+    .populate('books')
     .then(notFound(res))
     .then(success(res))
     .catch(next)
