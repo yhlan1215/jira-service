@@ -17,6 +17,6 @@ router.use('/resetPassword', resetPassword)
 router.use('/books', book)
 router.use('/authors', author)
 router.use('/bookStores', bookStore)
-router.use('/bookIndexs', bookIndex)
+router.use('/bookIndexes', bookIndex)
 
 export { router as api }

@@ -2,14 +2,10 @@ import mongoose from 'mongoose'
 import idValidator from 'mongoose-id-validator'
 
 const bookStoreSchema = new mongoose.Schema({
-  storeName: {
+  name: {
     type: String,
     required: true
   },
-  bookIndex: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'BookIndex'
-  }]
 }, {
   toJSON: {
     virtuals: true,
@@ -18,6 +14,13 @@ const bookStoreSchema = new mongoose.Schema({
       delete ret.__v
     }
   }
+})
+
+bookStoreSchema.virtual('books', {
+  ref: 'BookIndex',
+  localField: '_id',
+  foreignField: 'bookStore',
+  justOne: false
 })
 
 bookStoreSchema.plugin(idValidator)

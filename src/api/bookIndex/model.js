@@ -6,8 +6,13 @@ const bookIndexSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book'
   },
+  bookStore: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BookStore'
+  },
   theNumberOfBooks: {
-    type: Number
+    type: Number,
+    min: 0
   }
 }, {
   toJSON: {
