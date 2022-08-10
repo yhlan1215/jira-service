@@ -9,6 +9,12 @@ export const create = ({ body }, res, next) =>
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   Book.find(query, select, cursor)
     .populate('author', 'name')
+    .then(async (books) => {
+      const length = await Book.countDocuments(books)
+      res.setHeader('Access-Control-Expose-Headers', 'length')
+      res.setHeader('length', length)
+      return books
+    })
     .then(success(res))
     .catch(next)
 
@@ -25,6 +31,7 @@ export const update = ({ body, params }, res, next) =>
     .then((book) => {
       return book ? Object.assign(book, body).save() : null
     })
+    .then((book) => book.populate('author').execPopulate())
     .then(success(res))
     .catch(next)
 

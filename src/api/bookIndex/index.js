@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
-import { create, index, show, update, destroy } from './controller.js'
+import { create, index, show, update, destroy, plusOne, minusOne } from './controller.js'
 
 const router = new Router()
 
@@ -19,5 +19,11 @@ router.put('/:id',
 
 router.delete('/:id',
   destroy)
+
+router.put('/:id/plus',
+  plusOne)
+
+router.put('/:id/minus',
+  minusOne)
 
 export default router

@@ -34,3 +34,23 @@ export const destroy = ({ params }, res, next) =>
     .then((bookIndex) => bookIndex ? bookIndex.remove() : null)
     .then(success(res, 204))
     .catch(next)
+
+export const plusOne = ({ params }, res, next) =>
+  BookIndex.findById(params.id)
+    .then(notFound(res))
+    .then((bookIndex) => {
+      bookIndex.theNumberOfBooks++
+      return bookIndex.save()
+    })
+    .then(success(res))
+    .catch(next)
+
+export const minusOne = ({ params }, res, next) =>
+  BookIndex.findById(params.id)
+    .then(notFound(res))
+    .then((bookIndex) => {
+      bookIndex.theNumberOfBooks--
+      return bookIndex.save()
+    })
+    .then(success(res))
+    .catch(next)
