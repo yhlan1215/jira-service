@@ -6,7 +6,8 @@ export const create = ({ body }, res, next) =>
     .then(success(res, 201))
     .catch(next)
 
-export const index = ({ querymen: { query, select, cursor } }, res, next) =>
+export const index = ({ querymen: { query, select, cursor } }, res, next) => {
+  delete cursor.sort
   Book.find(query, select, cursor)
     .populate('author', 'name')
     .then(async (books) => {
@@ -17,6 +18,7 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
     })
     .then(success(res))
     .catch(next)
+}
 
 export const show = ({ params }, res, next) =>
   Book.findById(params.id)

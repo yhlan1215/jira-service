@@ -8,7 +8,9 @@ router.post('/',
   create)
 
 router.get('/',
-  query(),
+  query({
+    bookStore: String
+  }),
   index)
 
 router.get('/:id',

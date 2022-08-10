@@ -6,7 +6,8 @@ export const create = ({ body }, res, next) =>
     .then(success(res, 201))
     .catch(next)
 
-export const index = ({ querymen: { query, select, cursor } }, res, next) =>
+export const index = ({ querymen: { query, select, cursor } }, res, next) => {
+  delete cursor.sort
   BookStore.find(query, select, cursor)
     .populate({
       path: 'books',
@@ -16,8 +17,15 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
         select: 'name',
       }
     })
+    .then(async (bookStores) => {
+      const length = await BookStore.countDocuments(bookStores)
+      res.setHeader('Access-Control-Expose-Headers', 'length')
+      res.setHeader('length', length)
+      return bookStores
+    })
     .then(success(res))
     .catch(next)
+}
 
 export const show = ({ params }, res, next) =>
   BookStore.findById(params.id)

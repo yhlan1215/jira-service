@@ -6,11 +6,19 @@ export const create = ({ body }, res, next) =>
     .then(success(res, 201))
     .catch(next)
 
-export const index = ({ querymen: { query, select, cursor } }, res, next) =>
+export const index = ({ querymen: { query, select, cursor } }, res, next) => {
+  delete cursor.sort
   Author.find(query, select, cursor)
     .populate('books', 'name')
+    .then(async (authors) => {
+      const length = await Author.countDocuments(authors)
+      res.setHeader('Access-Control-Expose-Headers', 'length')
+      res.setHeader('length', length)
+      return authors
+    })
     .then(success(res))
     .catch(next)
+}
 
 export const show = ({ params }, res, next) =>
   Author.findById(params.id)
