@@ -9,7 +9,10 @@ router.post('/',
 
 router.get('/',
   query({
-    language:String
+    language: String,
+    category: String,
+    isOld: String,
+    author:String
   }),
   index)
 

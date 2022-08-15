@@ -9,7 +9,8 @@ router.post('/',
 
 router.get('/',
   query({
-    bookStore: String
+    bookStore: String,
+    theNumberOfBooks:String
   }),
   index)
 

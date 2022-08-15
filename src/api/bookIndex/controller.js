@@ -7,7 +7,14 @@ export const create = ({ body }, res, next) =>
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) => {
-  delete cursor.sort
+  if (cursor.sort.createdAt) {
+    delete cursor.sort.createdAt
+  }
+  if (query.theNumberOfBooks) {
+    query.theNumberOfBooks = {
+      $in:query.theNumberOfBooks.split(',')
+    }
+  }
   BookIndex.find(query, select, cursor)
     .populate('books')
     .then(async (bookIndexes) => {

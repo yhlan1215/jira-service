@@ -7,9 +7,28 @@ export const create = ({ body }, res, next) =>
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) => {
-  delete cursor.sort
+  if (cursor.sort.createdAt) {
+    delete cursor.sort.createdAt
+  }
   if (query.language) {
-    query = { language: { $in:query.language.split(',') } }
+    query.language = {
+      $in: query.language.split(',')
+    }
+  }
+  if (query.category) {
+    query.category = {
+      $in: query.category.split(',')
+    }
+  }
+  if (query.author) {
+    query.author = {
+      $in: query.author.split(',')
+    }
+  }
+  if (query.isOld) {
+    query.isOld = {
+      $in: query.isOld.split(',')
+    }
   }
   Book.find(query, select, cursor)
     .populate('author', 'name')

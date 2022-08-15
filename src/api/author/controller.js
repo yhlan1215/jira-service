@@ -7,11 +7,18 @@ export const create = ({ body }, res, next) =>
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) => {
-  delete cursor.sort
+  if (cursor.sort.createdAt) {
+    delete cursor.sort.createdAt
+  }
+  if (query.sex) {
+    query.sex = {
+      $in:query.sex.split(',')
+    }
+  }
   Author.find(query, select, cursor)
     .populate('books', 'name')
     .then(async (authors) => {
-      const length = await Author.countDocuments(authors)
+      const length = await Author.countDocuments(query)
       res.setHeader('Access-Control-Expose-Headers', 'length')
       res.setHeader('length', length)
       return authors

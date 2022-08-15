@@ -18,7 +18,7 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) => {
       }
     })
     .then(async (bookStores) => {
-      const length = await BookStore.countDocuments(bookStores)
+      const length = await BookStore.countDocuments(query)
       res.setHeader('Access-Control-Expose-Headers', 'length')
       res.setHeader('length', length)
       return bookStores

@@ -8,7 +8,11 @@ router.post('/',
   create)
 
 router.get('/',
-  query(),
+  query(
+    {
+      sex:String
+    }
+  ),
   index)
 
 router.get('/:id',
