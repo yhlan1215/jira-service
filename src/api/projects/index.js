@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
-import { create, index, show, update, destroy, plusOne, minusOne } from './controller.js'
+import { create, index, show, update, destroy } from './controller.js'
 
 const router = new Router()
 
@@ -8,10 +8,15 @@ router.post('/',
   create)
 
 router.get('/',
-  query({
-    bookStore: String,
-    theNumberOfBooks:String
-  }),
+  query(
+    {
+      _id: String,
+      name: String,
+      organization: String,
+      personId: String,
+      pin: Boolean
+    }
+  ),
   index)
 
 router.get('/:id',
@@ -22,11 +27,5 @@ router.put('/:id',
 
 router.delete('/:id',
   destroy)
-
-router.put('/:id/plus',
-  plusOne)
-
-router.put('/:id/minus',
-  minusOne)
 
 export default router

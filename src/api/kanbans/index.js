@@ -8,7 +8,13 @@ router.post('/',
   create)
 
 router.get('/',
-  query(),
+  query(
+    {
+      _id: String,
+      name: String,
+      projectId: String,
+    }
+  ),
   index)
 
 router.get('/:id',
