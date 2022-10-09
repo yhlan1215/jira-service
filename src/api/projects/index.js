@@ -10,7 +10,7 @@ router.post('/',
 router.get('/',
   query(
     {
-      _id: String,
+      id: String,
       name: String,
       organization: String,
       personId: String,

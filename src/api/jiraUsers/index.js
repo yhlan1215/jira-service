@@ -11,7 +11,7 @@ router.get('/',
   query(
     {
       name: String,
-      _id: String
+      id: String
     }
   ),
   index)

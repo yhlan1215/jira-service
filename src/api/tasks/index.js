@@ -10,12 +10,13 @@ router.post('/',
 router.get('/',
   query(
     {
-      _id: String,
+      id: String,
       name: String,
       processorId: String,
       projectId: String,
       kanbanId: String,
-      typeId: String
+      type: String,
+      priority: String
     }
   ),
   index)

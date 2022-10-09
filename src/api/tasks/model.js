@@ -26,11 +26,23 @@ const tasksSchema = new mongoose.Schema({
   {
     type: String,
     trim: true,
+  },
+  priority:{
+    type: String,
+    trim: true,
+    enum:['high', 'medium', 'low'],
+    required: true
+  },
+  point:{
+    type: Number,
+    default:0
   }
 }, {
   toJSON: {
     transform: (obj, ret) => {
       delete ret.__v
+      ret.id = ret._id
+      delete ret._id
     }
   }
 })
