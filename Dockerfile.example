@@ -1,7 +1,7 @@
 FROM node:latest
-RUN mkdir -p /raji/service
-COPY . /raji/service
-WORKDIR /raji/service
+RUN mkdir -p /jira/service
+COPY . /jira/service
+WORKDIR /jira/service
 RUN npm install
 ENV PORT 8080
 ENV MASTER_KEY xxxxxx
